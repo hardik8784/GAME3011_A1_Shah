@@ -21,6 +21,8 @@ public class MovementComponent : MonoBehaviour
     //Components
     PlayerController playerController;
 
+    private Rigidbody rigidBody;
+
     [Header("Movement Refrences")]
     Vector2 inputVector = Vector2.zero;
     Vector3 moveDirection = Vector3.zero;
@@ -28,6 +30,7 @@ public class MovementComponent : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     // Start is called before the first frame update
@@ -39,7 +42,15 @@ public class MovementComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!(inputVector.magnitude > 0))
+        {
+            moveDirection = Vector3.zero;
+        }
+
+        moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
+
+        Vector3 movementDirection = moveDirection * (Speed * Time.deltaTime);
+        transform.position += movementDirection;
     }
 
     public void OnMovement(InputValue value)
