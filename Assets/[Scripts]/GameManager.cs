@@ -11,13 +11,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameObject ModeToggleButton;
+
+    public TMP_Text ModeToggleButton_Text;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ModeToggleButton.GetComponent<Button>().onClick.AddListener(OnModeToggleButtonClicked);
+
+        ModeToggleButton_Text = ModeToggleButton.GetComponentInChildren<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -25,4 +34,16 @@ public class GameManager : MonoBehaviour
     {
        
     }
+
+    public void OnModeToggleButtonClicked()
+    {
+        ModeToggleButton_Text.text = "Extract Mode";
+        print("Extract Mode");
+    }
+}
+
+public enum TOOGLE_MODE
+{
+    EXTRACT_MODE,
+    SCAN_MODE
 }
