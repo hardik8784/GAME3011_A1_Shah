@@ -37,8 +37,20 @@ public class GameManager : MonoBehaviour
 
     public void OnModeToggleButtonClicked()
     {
-        ModeToggleButton_Text.text = "Extract Mode";
-        print("Extract Mode");
+        if (MiniGame.Instance.Toogle_mode == TOOGLE_MODE.EXTRACT_MODE)
+        {
+            MiniGame.Instance.Toogle_mode = TOOGLE_MODE.SCAN_MODE;
+            ModeToggleButton_Text.text = "Extract Mode";
+            MiniGame.Instance.MessageText.text = "You are in scan mode";
+            //print("Scan Mode");
+        }
+        else
+        {
+            MiniGame.Instance.Toogle_mode = TOOGLE_MODE.EXTRACT_MODE;
+            ModeToggleButton_Text.text = "Scan Mode";
+            MiniGame.Instance.MessageText.text = "You are in extract mode";
+        }
+       
     }
 }
 
@@ -46,4 +58,21 @@ public enum TOOGLE_MODE
 {
     EXTRACT_MODE,
     SCAN_MODE
+}
+
+public enum LIST_OF_RESOURCE
+{
+    B_T_01,
+    BAG,
+    BELTS,
+    BOOK,
+    BOOTS,
+    BRACERS,
+    CLOAKS,
+    GLOVES,
+    NECKLACE,
+    PANTS,
+    RINGS,
+    SCROLL
+
 }

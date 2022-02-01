@@ -6,7 +6,7 @@ public class StartGame : MonoBehaviour
 {
 
     public PlayerBehaviour Player;
-    public bool startGame =false;
+    public bool startGame = false;
     public GameObject MiniGame;
 
     private void Awake()
