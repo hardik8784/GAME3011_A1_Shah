@@ -18,13 +18,17 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject ModeToggleButton;
-
     public TMP_Text ModeToggleButton_Text;
+    public GameObject RevealBoardButton;
+    public TMP_Text GameModeLog;
+    public TMP_Text ResourceCounterText;
 
     // Start is called before the first frame update
     void Start()
     {
         ModeToggleButton.GetComponent<Button>().onClick.AddListener(OnModeToggleButtonClicked);
+        RevealBoardButton.GetComponent<Button>().onClick.AddListener(OnShowGameBoardButtonClicked);
+
 
         ModeToggleButton_Text = ModeToggleButton.GetComponentInChildren<TMP_Text>();
     }
@@ -32,7 +36,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        GameModeLog.text = "Pending Extractaction: " + MiniGame.Instance.ExtractCount +
+                           "\n Total Scan Chance: " + MiniGame.Instance.ScanNumbers +
+                           "\n  Pending Scan: " + MiniGame.Instance.scanModeClickCount;
+        
+        ResourceCounterText.text = "";
+        
+        for (int i = 0; i < 12; i++)
+        {
+            ResourceCounterText.text += MiniGame.Instance.resourceNames[i] + ": \t" + MiniGame.Instance.resourcesAmount[i] + "\n";
+
+        }
     }
 
     public void OnModeToggleButtonClicked()
@@ -42,7 +56,6 @@ public class GameManager : MonoBehaviour
             MiniGame.Instance.Toogle_mode = TOOGLE_MODE.SCAN_MODE;
             ModeToggleButton_Text.text = "Extract Mode";
             MiniGame.Instance.MessageText.text = "You are in scan mode";
-            //print("Scan Mode");
         }
         else
         {
@@ -52,6 +65,12 @@ public class GameManager : MonoBehaviour
         }
        
     }
+
+    public void OnShowGameBoardButtonClicked()
+    {
+        StartCoroutine(MiniGame.Instance.showGameBoard());
+    }
+
 }
 
 public enum TOOGLE_MODE
@@ -62,7 +81,7 @@ public enum TOOGLE_MODE
 
 public enum LIST_OF_RESOURCE
 {
-    B_T_01,
+    BOW,
     BAG,
     BELTS,
     BOOK,
@@ -74,5 +93,4 @@ public enum LIST_OF_RESOURCE
     PANTS,
     RINGS,
     SCROLL
-
 }

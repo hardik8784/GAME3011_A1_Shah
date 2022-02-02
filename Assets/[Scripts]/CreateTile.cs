@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CreateTile : MonoBehaviour
+public class CreateTile : MonoBehaviour, IPointerDownHandler
 {
     public Image icon;
     public Image CoverImage;
@@ -54,11 +54,11 @@ public class CreateTile : MonoBehaviour
         if (MiniGame.Instance.Toogle_mode == TOOGLE_MODE.SCAN_MODE)
         {
 
-            //MiniGame.Instance.ShowTilesScanMode(coordinate);
+            MiniGame.Instance.ShowTilesScanMode(coordinate);
         }
         else
         {
-           // MiniGame.Instance.extractTiles(coordinate);
+            MiniGame.Instance.ExtractTiles(coordinate);
         }
     }
 

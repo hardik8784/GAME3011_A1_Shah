@@ -56,6 +56,6 @@ public class MovementComponent : MonoBehaviour
     public void OnMovement(InputValue value)
     {
         inputVector = value.Get<Vector2>();
-        print("InputVector : " + inputVector);
+        //print("InputVector : " + inputVector);
     }
 }
