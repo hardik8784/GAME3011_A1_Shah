@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,13 +23,13 @@ public class GameManager : MonoBehaviour
     public GameObject RevealBoardButton;
     public TMP_Text GameModeLog;
     public TMP_Text ResourceCounterText;
-
+    public GameObject RestartButton;
     // Start is called before the first frame update
     void Start()
     {
         ModeToggleButton.GetComponent<Button>().onClick.AddListener(OnModeToggleButtonClicked);
-        RevealBoardButton.GetComponent<Button>().onClick.AddListener(OnShowGameBoardButtonClicked);
-
+        RevealBoardButton.GetComponent<Button>().onClick.AddListener(OnRevealBoardButtonClicked);
+        RestartButton.GetComponent<Button>().onClick.AddListener(OnRestartButtonClicked);
 
         ModeToggleButton_Text = ModeToggleButton.GetComponentInChildren<TMP_Text>();
     }
@@ -66,9 +67,14 @@ public class GameManager : MonoBehaviour
        
     }
 
-    public void OnShowGameBoardButtonClicked()
+    public void OnRevealBoardButtonClicked()
     {
         StartCoroutine(MiniGame.Instance.showGameBoard());
+    }
+
+    public void OnRestartButtonClicked()
+    {
+        SceneManager.LoadScene("Start");
     }
 
 }
